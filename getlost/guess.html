@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Get Lost</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@300;600&family=Young+Serif&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/guess.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+        <script src="scripts/mapdisplay.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id="nameplate"><a href='/'>Tim<br>Mikulski</a></div>
+        </header>
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <p id="modal-p">filler text</p>
+              <button type="button" id="resetButton">restart game</button>
+            </div>
+          
+          </div>
+            
+        <div id="maps">
+        <div id="outline">
+            <span class="prompt">Remember this activity?</span>
+            <div id="outlinemap" style="width:600px;height:400px"></div>
+        </div>
+        <div id="guess">
+            <span class="prompt">Guess where it was by clicking on the map:</span>
+            <div id="guessmap" style="width:600px;height:400px"></div>
+        </div>
+        </div>
+
+        <div id="submit"><button type="button" id="submitButton">submit guess</button></div>
+    </body>
+</html>

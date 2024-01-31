@@ -1,0 +1,59 @@
+body {
+    background-color: #fadbc5;
+    height: 100%;
+    min-height: 100%;
+}
+
+header {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position:relative;
+    height: 72px;
+    width: 100%;
+}
+
+#nameplate {
+    float: right;
+    margin-left: auto;
+    padding: 3px;
+    font-size: 40px;
+    line-height: 36px;
+    font-family: 'Young Serif', serif;
+    color: #fc4c02;
+    z-index: 2;
+    width: 200px;
+    height: 100%;
+    text-align: right;
+}
+
+#nameplate > a:link, #nameplate > a:visited {
+    color:#fc4c02;
+    text-decoration: none;
+}
+
+#main {
+    text-align: center;
+    font-family: 'Rokkitt', sans-serif;
+    font-weight: 300;
+}
+
+#inprogress {
+    font-size: 32px;
+    color: #fc4c02;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.logentry {
+    animation: fadeIn 1s forwards;
+    margin: 6px auto;
+    max-width: 60%;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

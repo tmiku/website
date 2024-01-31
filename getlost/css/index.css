@@ -1,0 +1,255 @@
+body {
+    background-color: #fadbc5;
+    height: 100%;
+    min-height: 100%;
+}
+
+header {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position:relative;
+    height: 72px;
+    width: 100%;
+}
+
+#nameplate {
+    float: right;
+    margin-left: auto;
+    padding: 3px;
+    font-size: 40px;
+    line-height: 36px;
+    font-family: 'Young Serif', serif;
+    color: #fc4c02;
+    z-index: 2;
+    width: 200px;
+    height: 100%;
+    text-align: right;
+}
+
+#nameplate > a:link, #nameplate > a:visited {
+    color:#fc4c02;
+    text-decoration: none;
+}
+
+#main {
+    text-align: center;
+    font-family: 'Rokkitt', sans-serif;
+    font-weight: 300;
+}
+
+#texttitle {
+    font-size: 40px;
+    color: #fc4c02;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+#textrules {
+    font-size: 20px;
+    color: #70131e;
+    line-height: 36px;
+    margin-top: 0px;
+    margin-bottom: 28px;
+}
+
+#privcheck {
+    vertical-align: middle;
+    position: relative;
+}
+
+#private {
+    font-size: 16px;
+    color: #70131e;
+    vertical-align: middle;
+    position: relative;
+}
+
+#loginbutton {
+    padding-top: 4px;
+    max-height: 48px;
+    display: block;
+    margin: auto;
+}
+
+#loginbutton:hover{
+    opacity:0.75
+}
+
+#privacynotice {
+    font-size: 14px;
+    color: #70131e;
+    text-decoration: dotted underline;
+    cursor: pointer
+}
+#privacynotice:hover{
+    opacity: 0.5
+}
+
+#modalactivate {
+	display:none;
+}
+#modalactivate:checked ~ #m1,
+#modalactivate:checked ~ .modal-background {
+	display: block;
+    animation: fadeIn 1s forwards;
+}
+#modal2activate {
+	display:none;
+}
+#modal2activate:checked ~ #m2,
+#modal2activate:checked ~ .modal-background {
+	display: block;
+    animation: fadeIn 1s forwards;
+}
+
+.modal-background {
+	width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 9998;
+}
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: none;	
+    min-width:350px;
+    width:35%;
+    min-height: 300px;
+    background-color: #fadbc5;
+    border: solid 1px #70131e;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 9999;
+}
+.modal-content > p {
+    margin: 0;
+	padding: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: inline-block
+}
+
+.modal-content {
+    width: 100%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    color: #70131e
+}
+
+p > a:link, p > a:visited {
+    color:#70131e
+}
+
+.modal-header label {
+	box-sizing: border-box;
+    float: right;
+    line-height: 0px;
+    padding: 10px 10px 0 10px;
+    cursor: pointer;
+}
+.modal-header label:hover img {
+	opacity: 0.7;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+#m2 {
+        position: fixed;
+        top: 10%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: none;	
+        min-width:350px;
+        width:45%;
+        min-height: 300px;
+        background-color: #fadbc5;
+        border: solid 1px #70131e;
+        box-sizing: border-box;
+        overflow: scroll;
+        z-index: 9991;
+        font-family: 'Rokkitt';
+        font-weight: 300;
+}
+
+#m2 > .modal-content > p {
+    margin: 0;
+	padding: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: inline-block;
+    font-family: 'Rokkitt';
+    font-size: 14px;
+    font-weight: 300;
+
+}
+
+#m2 > .modal-content {
+    width: 80%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    color: #70131e;
+    margin-top:10px
+}
+
+a:link, a:visited {
+    color:#70131e
+}
+
+strong {font-weight: 600; font-size:20px}
+
+
+footer {
+    padding-top: 10px;
+    position: fixed;
+    bottom: 0;
+    background-color: #fadbc5;
+    height: 45px;
+    width:100%;
+    left: 0;
+}
+
+.footertext {
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-family: 'Rokkitt', sans-serif;
+    font-size: 12pt;
+    font-weight: 400;
+    color: #70131e;
+    float: left
+}
+
+#footericons {
+    vertical-align: middle;
+    translate: 0px -2.83px;
+    float: right;
+    padding-right: 10px
+}
+
+.icon {
+    height:24px;
+    width:auto
+}
+
+#bottomlinks {
+    padding-right: 10px;
+    margin:auto
+}
+
+#bottomlinks > a, #bottomlinks > label {
+    text-decoration: dotted underline;
+    cursor: pointer
+}
