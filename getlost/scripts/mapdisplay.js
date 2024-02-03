@@ -59,7 +59,6 @@ $(() => { //document ready handler
       submitButtonState = "marked";
     }
     else if (submitButtonState != "next") {guessMark.setLatLng([e.latlng.lat,e.latlng.lng]);}
-    console.log("This click scores " + scoreGuess()); // DEBUG: remove this
     if (submitButtonState == 'grayed') {
       submitButtonState = 'marked';
       $("#submitButton").css({"background-color": "#fc4c02", "color": "white", "cursor":"pointer"});
@@ -137,8 +136,7 @@ function drawOutlineMap(encodedPath) { //draw guess map given gmaps polyline
   const center = [minLat + 0.5 * (maxLat - minLat),minLon + 0.5 * (maxLon - minLon)];
 
   //center based on new polyline
-  console.log("Found bounds for activity:", outline.getBounds());
-  outlineMap.fitBounds(outline.getBounds()); //WHY IS THIS NOT WORKING THE SECOND TIME
+  outlineMap.fitBounds(outline.getBounds());
 
   // add new polyline
   //outline = L.polyline(path, {color: 'red'}); 

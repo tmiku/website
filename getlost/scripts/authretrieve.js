@@ -11,12 +11,10 @@ var NUM_PAGES = 5;
 $(() => { //document ready handler
 
     getAccessToken().then((data, textStatus, jqXHR) => { //get the access token request/response; then, when it's ready...
-        console.log('data after thenning token req:')
-	console.log(data)
 	data = JSON.parse(atob(data))
 	const userName = data.athlete.username;
         let tok = data.access_token;
-        if (!tok) {logMessage('Failed to exchange authorization code for access token. Try again from <a class="loglink" href="/getlost/"> here</a>.')} else {logMessage('Access token received...' + tok)}
+        if (!tok) {logMessage('Failed to exchange authorization code for access token. Try again from <a class="loglink" href="/getlost/"> here</a>.')} else {logMessage('Access token received.')}
 	    logMessage('Beginning activity search...');
         return recordActivities(tok);
     }).then(() => { //then, when all the activities are logged, save on off to local storage
@@ -79,11 +77,9 @@ async function recordActivities(tok) {
         logMessage("Requesting activity page " + curIdx + "...");
         page = await getActivityPage(curIdx,tok);
         logMessage("Activity page " + curIdx + " received.");
-	console.log(page);
         logMessage("Reading activity page " + curIdx + "...");
 
         //if page is empty or we have a lot of activities, we're done
-        console.log("doing page check")
 	if (page.length == 0 || curIdx > NUM_PAGES) {
             searchDone = true;
             switch (page.length) {
