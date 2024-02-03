@@ -47,11 +47,16 @@ header {
     max-width: 650px;
     color: #70131e;
     font-size: 18px;
-    line-height: 26px;
+    line-height: 22px;
     font-family: 'Rokkitt', sans-serif;
     font-weight: 300;
     margin:auto;
     border-bottom: 1px solid #70131e
+}
+
+blockquote {
+    font-size:16px;
+    line-height:18px;
 }
 
 sup { vertical-align: top; position: relative; top: -6px; }
