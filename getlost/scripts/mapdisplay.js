@@ -12,7 +12,7 @@ var scoreLine;
 var goalMark;
 var acts;
 
-var totalRounds = 3;
+var totalRounds = 5;
 var maxRoundScore = 1000;
 var maxTotalScore = totalRounds * maxRoundScore;
 

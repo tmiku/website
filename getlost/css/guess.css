@@ -148,6 +148,7 @@ header {
   .footer > a {
     text-decoration: dotted underline;
     color:#fc4c02;
+    z-index:4;
   }
   .footer > a:hover {
     opacity:0.5
