@@ -33,15 +33,20 @@
             
         <div id="maps">
         <div id="outline">
-            <span class="prompt">Remember this activity?</span>
+            <span class="prompt"><b>Remember this activity?</b></span><br>
             <div id="outlinemap" style="width:600px;height:400px"></div>
-        </div>
+        </div><br>
         <div id="guess">
-            <span class="prompt">Guess where it was by clicking on the map:</span>
+            <span class="prompt"><b>Guess where it was by clicking the map. Drag to move.</b></span><br>
             <div id="guessmap" style="width:600px;height:400px"></div>
         </div>
         </div>
 
-        <div id="submit"><button type="button" id="submitButton">submit guess</button></div>
+        <div id="belowmap">
+            <p class="prompt">Round <b><span id="roundlabel">1</span> / 5</b></p><br>
+            <p class="prompt">Round score <b><span id="lastguess" class="score">???</span> / 1000</b></p><br>
+            <p class="prompt">Total score <b><span id="totalscore" class="score">0</span> / 5000</b></p><br>
+            <button type="button" id="submitButton">submit guess</button></div><br>
+            <p class="footer"><a href="/contact/">lmk if something's broken</a> - <a href="https://ko-fi.com/tmiku">leave a tip</a></p>
     </body>
 </html>
