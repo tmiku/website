@@ -6,10 +6,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@300;400;600&family=Young+Serif&display=swap" rel="stylesheet">
+    <script src="/scripts/contactform.js"></script>
 </head>
 
 <body>
 <header>
+    <div id="banner"><img id="birds" src="/images/header.png"></img></div>
     <div id="nameplate"><a href="/">Tim<br>Mikulski</a></div>
 </header>
 
@@ -31,9 +33,10 @@
     </div>
     <br>
     <input type="text" name="password" style="display:none !important" tabindex="-1" autocomplete="new-password">
-    <input id="submit" type="submit" value="Send">
+    <input id="submit" type="button" value="Send">
     <br>
 </form>
+<p id="#status"></p>
 
 <input type="checkbox" id="modalactivate">
 <label for="modalactivate" class="modal-background"></label>

@@ -10,12 +10,13 @@
 
 <body>
 <header>
+	<div id="banner"><img id="birds" src="images/header.png"></img></div>
     <div id="nameplate"><a href="">Tim<br>Mikulski</a></div>
 </header>
 
 <div id="stage">
     <div id="graphic">
-        <img id="centerpiece" src="images/ph.png"></img>
+        <img id="centerpiece" src="images/center.png"></img>
     </div>
     <div id="contentouter">
     <div id="contentlinesouter">
@@ -52,11 +53,12 @@
     <div class="modal-content">
     <p><strong>colophon</strong></p>
     <p>This website uses the open source fonts Young Serif and Rokkitt.</p>
-    <p>The home page and Get Lost are handwritten HTML/CSS, and I wrote a simple static site generator in Go for the Snips section.</p>
-    <p>I self-host this website on a Digital Oceans VM running Nginx on Ubuntu. I use Cloudflare for domain registration and CDN, and Sendgrid to deliver the contact form emails. </p>
-    <p>I am running a simple backend server I wrote in Go to handle the contact form and Strava authentication, connected using an Nginx reverse proxy.</p>
+	<p>The home graphic and banner are derived from the images Buoy / Boei from Flickr user Remko van Dokkum (CC BY 2.0) and Birds On The Wire from Wikimedia user Tomascastelazo (CC BY SA 3.0). Feel free to use either one under CC BY SA 4.0.</p>
+    <p>The home page and Get Lost are handwritten HTML/CSS. I wrote a simple static site generator in Go for the Snips section.</p>
+    <p>I self-host this website on a Digital Oceans VM running Nginx on Ubuntu. I use Cloudflare for CDN and domain registration, and the contact form sends emails with Sendgrid. </p>
+    <p>I am running a simple backend server I wrote in Go using Gin to handle the contact form and Strava authentication. It runs together with the Nginx server using Docker Compose.</p>
     <p>If you're interested in self-hosting your own website and have questions, please reach out!</p>
-</div>
+	</div>
 </div>
 
 <footer>
