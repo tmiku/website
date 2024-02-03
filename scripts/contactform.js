@@ -11,18 +11,20 @@ $(() => {
         let formEmail = $("#emailfield").val();
         let formPass = $("input[name='password']").val();
         
-        if (formMessage == "" || formEmail == "") {$("#status").html("Please fill out both boxes and try again."); return;}
-        if (!validateEmail(formEmail)) {$("#status").html("Please try again with a valid email address."); return;}
-        if (formPass != "") {$("#status").html("Something isn't right. Refresh and try again, and if this keeps happening text me or something."); return;}
+        if (formMessage == "" || formEmail == "") {alert("Please fill out both boxes and try again."); return;}
+        if (!validateEmail(formEmail)) {alert("Please try again with a valid email address."); return;}
+        if (formPass != "") {alert("Something isn't right. Refresh and try again, and if this keeps happening text me or something."); return;}
         
-        $("#status").html("Sending message...")
+	dateStr = new Date().toString()
+        body = JSON.stringify({email: formEmail, ["text"]: formMessage, date: dateStr})
+
         $.post(window.location.origin+"/mikuserv/contact",
-        {email: formEmail, ["text"]: formMessage, date: new Date().toString()}, //data
-        (data, textStatus, jqXHR) => {$("#status").html("Message sent!") //success handler
+        body, //data
+        (data, textStatus, jqXHR) => {alert("Message sent, thank you!") //success handler
         $("#messagefield").val('')
         $("#emailfield").val('')
         }
-        ).fail((jqXHR, textStatus, errorThrown) => {$("#status").html("Failed with error: " + errorThrown)})
+        ).fail((jqXHR, textStatus, errorThrown) => {alert("Failed with error: " + errorThrown)})
         }
         )
     
