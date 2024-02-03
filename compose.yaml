@@ -4,5 +4,8 @@ services:
     ports:
       - "80:80"
   mikuserv:
-    build: /home/tmiku/mikuserv-dev/
+    build: /home/tmiku/mikuserv/
+    expose:
+      - 3001
+
 

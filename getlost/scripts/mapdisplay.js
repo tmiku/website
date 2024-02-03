@@ -13,17 +13,31 @@ var goalMark;
 var acts;
 
 var totalRounds = 3;
+var maxRoundScore = 1000;
+var maxTotalScore = totalRounds * maxRoundScore;
+
+var custMark = new L.Icon({
+  iconUrl: 'images/marker.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+//clear data when people leave
+addEventListener("beforeunload", (event) => {sessionStorage.clear()});
 
 $(() => { //document ready handler
   //make sure guess button starts disabled
   $("#submitButton").attr("disabled", true);
   $("#submitButton").css({"background-color": "#fadbc5", "color": "#fc4c02"})  
-  if (!sessionStorage.getItem("TotallyLostActivity")){
+  if (!sessionStorage.getItem("GetLostActivity")){
         alert("Unable to retrieve saved activity info. This is weird - contact Tim about it.");
-        setTimeout(() => {window.location.replace("http://rpi.local/totallylost/")}, 3000)
+        setTimeout(() => {window.location.replace(window.location.origin+"/getlost/")}, 3000)
     }
-    acts = JSON.parse(sessionStorage.getItem("TotallyLostActivity"));
-    const tok = sessionStorage.getItem("TotallyLostToken");
+    acts = JSON.parse(sessionStorage.getItem("GetLostActivity"));
+    const tok = sessionStorage.getItem("GetLostToken");
     
     //initialize outline map
     outlineMap = L.map('outlinemap', {attributionControl: false}).setView([0,0], 13);
@@ -31,13 +45,14 @@ $(() => { //document ready handler
     guessMap = L.map('guessmap', {attributionControl: false}).setView([38.404,-96.182],2);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
+    minZoom: 1,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}
     ).addTo(guessMap);
 
     //set up guess marker click handler
     guessMap.on('click', function(e) {
-    if (!guessSet) {
-      guessMark = L.marker([e.latlng.lat,e.latlng.lng]).addTo(guessMap); 
+    if (!guessSet && submitButtonState != "next") {
+      guessMark = L.marker([e.latlng.lat,e.latlng.lng],{icon: custMark}).addTo(guessMap); 
       guessSet = true;
       $("#submitButton").removeAttr("disabled");
       $("#submitButton").css({"background-color": "#fc4c02", "color": "white", "cursor":"pointer"})
@@ -47,8 +62,8 @@ $(() => { //document ready handler
     console.log("This click scores " + scoreGuess()); // DEBUG: remove this
     if (submitButtonState == 'grayed') {
       submitButtonState = 'marked';
-      $("#submitButton").css({"background-color": "#fc4c02", "color": "white", "cursor":"pointer"})}
-      $("#submitButton").html("submit guess")
+      $("#submitButton").css({"background-color": "#fc4c02", "color": "white", "cursor":"pointer"});
+      $("#submitButton").html("submit guess");}
   });
 
     //set up submit/next click handler
@@ -104,9 +119,9 @@ function decode(encodedPath) {
 
 function drawOutlineMap(encodedPath) { //draw guess map given gmaps polyline
   let path = decode(encodedPath);
-  outline = L.polyline(path, {color: 'red'}); 
+  outline = L.polyline(path, {color: '#fc4c02'}); 
   goalPoint = path[Math.floor(Math.random() * path.length)];
-  outlineGoal = L.marker(goalPoint).addTo(outlineMap)
+  outlineGoal = L.marker(goalPoint,{icon: custMark}).addTo(outlineMap)
   
   // get important info about raw polyline
   const transposed = path[0].map((col, i) => path.map(row => row[i]));
@@ -156,8 +171,8 @@ function illustrateScore(){ // lol more gross globals
 
   //draw outline, then goal marker, then score line
   outline.addTo(guessMap);
-  goalMark = L.marker(goalPoint).addTo(guessMap);
-  scoreLine = L.polyline([guessMark.getLatLng(),goalPoint],{color: 'black', dashArray: '4'}).addTo(guessMap);
+  goalMark = L.marker(goalPoint,{icon: custMark}).addTo(guessMap);
+  scoreLine = L.polyline([guessMark.getLatLng(),goalPoint],{color: 'black', dashArray: '2 6'}).addTo(guessMap);
 
 }
 
@@ -171,42 +186,49 @@ function onSubmitClick(){ // I was told that functional programming's for pussie
       wrapUpGame();
       return //don't do the rest of this block
     }
-
-    // Update round number
-    round += 1;
-
+    round += 1; // Update round number
     //reset outline map, draw next activity
     outlineMap.remove();
     outlineMap = L.map('outlinemap', {attributionControl: false}).setView([0,0], 13);
     drawOutlineMap(acts[round-1][1]);
-
-    //reset guess map
-    resetGuessMap();
-
-    //update button state
-    submitButtonState = 'grayed';
+    
+    resetGuessMap(); //reset guess map
+    $("#roundlabel").html(round)
+    $("#lastguess").html("???")
+    submitButtonState = 'grayed'; //update button state
     $("#submitButton").attr("disabled", true);
     $("#submitButton").css({"background-color": "#fadbc5", "color": "#fc4c02", "cursor":"none"})
     $("#submitButton").html("submit guess")
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
   if (submitButtonState == 'marked') {
     //Logic to submit a guess is in this block
-    score += scoreGuess();
+    newScore = scoreGuess();
+    score += newScore;
     illustrateScore();
+    $("#lastguess").html(newScore)
+    $("#totalscore").html(score)
+    if (round==totalRounds) {
+      $("#submitButton").html("finish game");
+    } else {
+      $("#submitButton").html("next activity");
+    }
     submitButtonState = 'next';
-    $("#submitButton").html("next activity")
+    
   }
 }
 
 function wrapUpGame(){
-  document.getElementById("myModal").style.display = "block";
-  $("#modal-p").html("Game finished! You scored " + score + " of " + (totalRounds*1000) + " possible points.");
+  $("#maps").css("animation-duration","1s").css("animation-name","fadeOut").css("opacity",0)
+  $("#myModal").css("display","block").css("animation-duration","1s").css("animation-name","fadeIn")
+  $("#modal-p").html("Game finished! You scored " + score + " of " + (maxTotalScore) + " possible points.");
   $("#resetButton").click(restartGame)
 }
 
 function restartGame(){
   //reshuffle activities
   acts = acts.sort(() => 0.5 - Math.random());
-  sessionStorage.setItem("TotallyLostActivity",JSON.stringify(acts));
-  window.location.reload();
+  sessionStorage.setItem("GetLostActivity",JSON.stringify(acts));
+  window.location.replace(window.location.origin+"/getlost/")
 }
