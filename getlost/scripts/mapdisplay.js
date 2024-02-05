@@ -11,6 +11,7 @@ var round = 1;
 var scoreLine;
 var goalMark;
 var acts;
+var activityLink;
 
 var totalRounds = 5;
 var maxRoundScore = 1000;
@@ -37,7 +38,6 @@ $(() => { //document ready handler
         setTimeout(() => {window.location.replace(window.location.origin+"/getlost/")}, 3000)
     }
     acts = JSON.parse(sessionStorage.getItem("GetLostActivity"));
-    const tok = sessionStorage.getItem("GetLostToken");
     
     //initialize outline map
     outlineMap = L.map('outlinemap', {attributionControl: false}).setView([0,0], 13);
@@ -70,7 +70,8 @@ $(() => { //document ready handler
       onSubmitClick();
     });
 
-    //display first path
+    //display first path and save first link
+    activityLink = acts[0][0];
     drawOutlineMap(acts[0][1]);
 })
 
@@ -172,9 +173,13 @@ function illustrateScore(){ // lol more gross globals
   goalMark = L.marker(goalPoint,{icon: custMark}).addTo(guessMap);
   scoreLine = L.polyline([guessMark.getLatLng(),goalPoint],{color: 'black', dashArray: '2 6'}).addTo(guessMap);
 
+  //display link to activity
+  $('#activityLink').html('View on Strava');
+  $('#activityLink').attr('href', activityLink);
+
 }
 
-function onSubmitClick(){ // I was told that functional programming's for pussies, actually
+function onSubmitClick(){
   if (submitButtonState == 'grayed') {}
   if (submitButtonState == 'next') {
     // Logic to reset a round is in this block
@@ -185,9 +190,11 @@ function onSubmitClick(){ // I was told that functional programming's for pussie
       return //don't do the rest of this block
     }
     round += 1; // Update round number
-    //reset outline map, draw next activity
+
+    //reset outline map, draw next activity, save next link
     outlineMap.remove();
     outlineMap = L.map('outlinemap', {attributionControl: false}).setView([0,0], 13);
+    activityLink = acts[round-1][0];
     drawOutlineMap(acts[round-1][1]);
     
     resetGuessMap(); //reset guess map
@@ -197,6 +204,12 @@ function onSubmitClick(){ // I was told that functional programming's for pussie
     $("#submitButton").attr("disabled", true);
     $("#submitButton").css({"background-color": "#fadbc5", "color": "#fc4c02", "cursor":"none"})
     $("#submitButton").html("submit guess")
+
+    //clear activity link
+    $('#activityLink').html('&nbsp;');
+    $('#activityLink').attr('href', '');
+
+    //scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
