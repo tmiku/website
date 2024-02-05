@@ -7,8 +7,13 @@
 var NUM_ACTS = 5;
 var ACTS_PER_PAGE = 100;
 var NUM_PAGES = 5;
+var complete = false;
 
 $(() => { //document ready handler
+    //set up autodelete for data if load is not successful to avoid lingering sensitive info
+    addEventListener("beforeunload", (event) => {
+        if (!complete) {sessionStorage.clear()}
+        });
 
     getAccessToken().then((data, textStatus, jqXHR) => { //get the access token request/response; then, when it's ready...
 	data = JSON.parse(atob(data))
@@ -36,7 +41,8 @@ $(() => { //document ready handler
         logMessage('Removing unused activities...');
         sessionStorage.removeItem("GetLostTempActs");
 
-        logMessage('Activity load complete. Redirecting to game.')
+        complete = true;
+        logMessage('Activity load complete. Redirecting to game.');
         window.location.replace(window.location.origin+"/getlost/guess.html"); //time to play!
         }
     })
