@@ -109,7 +109,8 @@ function recordFromPage(page) {
     // not using this rich infra YET because we only send an activity id to the next page, can use plain string
     for (const activity of page) { //note below: ignore activities under half a mile (and mapless)
         if (activity.map.summary_polyline != "" && activity.distance > 800) {
-            cur.push([activity.id, activity.map.summary_polyline]);
+            let activityLink 
+            cur.push(['https://strava.com/activities/'+activity.id, activity.map.summary_polyline]);
         }
     }
     // update session storage. This might be slow? rewriting it for every page?
