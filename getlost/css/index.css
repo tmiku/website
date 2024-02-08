@@ -47,6 +47,10 @@ header {
     text-decoration: none;
 }
 
+#poweredby {
+    max-width:180px;
+}
+
 #main {
     text-align: center;
     font-family: 'Rokkitt', sans-serif;
@@ -54,10 +58,10 @@ header {
 }
 
 #texttitle {
-    font-size: 40px;
+    font-size: 48px;
     color: #fc4c02;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 0px;
 }
 
 #textrules {

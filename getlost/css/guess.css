@@ -106,6 +106,18 @@ header {
 
 .prompt > b {font-weight: 600;}
 
+.prompt > a {
+    text-decoration: dotted underline;
+}
+
+.prompt > a:hover {
+    opacity:0.5
+}
+
+#poweredby {
+    max-width: 150px;
+}
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -145,16 +157,17 @@ header {
     text-align: center;
   }
 
+  a, a:visited, a:active {
+    color:#fc4c02;
+  }
+
   .footer > a {
     text-decoration: dotted underline;
-    color:#fc4c02;
     z-index:4;
   }
+
   .footer > a:hover {
     opacity:0.5
-  }
-  .footer > a:visited, .footer > a:active {
-    color:#fc4c02;
   }
 
   @keyframes fadeOut {
