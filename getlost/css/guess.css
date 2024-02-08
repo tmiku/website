@@ -67,6 +67,10 @@ header {
     text-align:center
 }
 
+#activityLink {
+    display:none
+}
+
 #submit {
     text-align: center;
 }
