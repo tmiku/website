@@ -108,6 +108,7 @@ header {
 
 .prompt > a {
     text-decoration: dotted underline;
+    display:none;
 }
 
 .prompt > a:hover {
@@ -159,6 +160,10 @@ header {
 
   a, a:visited, a:active {
     color:#fc4c02;
+  }
+
+  img {
+    margin:auto
   }
 
   .footer > a {
