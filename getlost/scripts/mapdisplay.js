@@ -174,7 +174,7 @@ function illustrateScore(){ // lol more gross globals
   scoreLine = L.polyline([guessMark.getLatLng(),goalPoint],{color: 'black', dashArray: '2 6'}).addTo(guessMap);
 
   //display link to activity
-  $('#activityLink').css("display","none");
+  $('#activityLink').css("display","inline-block");
   $('#activityLink').html('View on Strava');
   $('#activityLink').attr('href', activityLink);
 
