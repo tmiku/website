@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../css/snip.css">
+    <link rel="stylesheet" href="./css/snip.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Young+Serif&display=swap" rel="stylesheet"> 
@@ -12,33 +12,40 @@
         <div id="banner"><img id="birds" src="/images/header.png"></img></div>
         <div id="nameplate"><a id="headlink" href="/">Tim<br>Mikulski</a></div>
     </header>
-    <p class="innerHtml" id="tagheader">Posts with tag: <strong>writing</strong></p>
-        <div class="innerHtml">
+
+    <div class="innerHtml">
         <div class="metadata">
-            <span class="date">2024-02-02</span> <br>
-            <span class="tags">Tags: <span class="tag"> <a href="/snips/tag/writing.html">writing</a></span></span> <br>
+            <span class="date">2024-02-19</span> <br>
+            <span class="tags">Tags: <span class="tag"> <a href="/snips/tag/code.html">code</a></span></span> <br>
         </div>
-        <h1 id="david-roth-on-the-golden-age-of-making-it-worse">david roth on the golden age of making it worse</h1>
+        <h1 id="ccount-an-honest-character-counter">ccount, an honest character counter</h1>
 
-<p>If I&rsquo;ve talked to you about writing before then I&rsquo;ve probably talked to you about Defector. If not, then I&rsquo;ll let them do the work of <a href="https://defector.com/how-we-got-here" target="_blank">catching you up to speed</a>. David Roth recently wrote this essay called <a href="https://defector.com/how-will-the-golden-age-of-making-it-worse-end" target="_blank">How Will The Golden Age Of &ldquo;Making It Worse&rdquo; End?</a> that very tightly pulls into focus a recent ambiguous malaise that&rsquo;s been wafting through the cultural airspace. Roth and Defector are perfectly poised to tell this story - the machinations of &ldquo;Enshittification Capital&rdquo; were central to the death<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> of Deadspin, as firm revulsion towards those machinations was during the formation of Defector. As usual, he tees off:</p>
+<p>Recently, I was reading <a href="http://tom7.org/abc/" target="_blank">tom7&rsquo;s &ldquo;printable x86&rdquo; SIGBOVIK paper</a>. His video accompanying the paper is incredible&mdash;in fact, most of the videos on his Youtube channel are, but they do tend to leave my brain feeling like a wrung rag. I didn&rsquo;t look at the paper itself until a few months after watching the video, and while I was reading, something jumped out at me:</p>
 
-<blockquote>
-<p>If it was always foolish to expect the free market to make things better, it feels more fanciful by the day to imagine a future in which the cynics and sociopaths in charge of that market do anything but continue to make it worse; they&rsquo;ve evinced no capacity for that, but also no interest in it. Whether this deterioration is the result of buccaneering libertarian delusion or just a bloodless calculation that concepts like &ldquo;safety&rdquo; and &ldquo;quality&rdquo; are more nice-to-have&rsquo;s than need-to-have&rsquo;s, it appears to be the only idea that any of these people have.</p>
-</blockquote>
+<p><img src="./images/count.png" alt="" /></p>
 
-<p><a href="https://defector.com/we-need-to-talk-about-chunkus" target="_blank">Roth&rsquo;s writing alone</a> is worth a subscription to Defector.  His guest episodes on Chapo Trap House uniformly rip too.</p>
+<p>The bulk of that section was straightforward. Because of the weird requirements of making a &ldquo;printable, executable program&rdquo;<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>, he had lots of dead space to fill. One of the ways he filled this was by showing a count of all of the bytes (i.e. characters) used in the paper, which also happened to be a unique way of proving that it was all printable: you could ctrl-F for most of the characters and see that the number matched. That wouldn&rsquo;t have struck me as odd without the cryptic addendum and string of digits below the section&rsquo;s body.</p>
+
+<p>&ldquo;The following characters were inserted to make the above converge.&rdquo; It caught me off guard because it didn&rsquo;t seem like there was any math around (at least not the type of math where words like &ldquo;converge&rdquo; get tossed around, and not in this part of the paper). I stewed on it for a few more minutes, and the need for that line started to make sense. The text of the character count is included in the region being counted, which a feedback loop such that trying to add that information accurately by hand would be impossible. If you try to count how many digits you have, writing that count down adds more digits, which then requires edits to another row. Having a free line at the end to write down whatever numbers you want helps coax this into a stable state.</p>
+
+<p>As an exercise, I wanted to make a program to add an appendix like that to and arbitrary text file. I picked up Python for the first time in years (since some physics projects while I was in college), and tried to slap together a quick prototype. Getting back into Python from Go was nice&mdash;this was absolutely a project that I could cut corners in for speed/entertainment, and Go puts up pretty solid fortifications on a lot of those corners as a matter of design philosophy.</p>
+
+<p>The results are <a href="https://gist.github.com/tmiku/6b98b70d8c586975ab5789d07e1aeeed" target="_blank">here on Github</a>, and as an example you can see a copy of RFC 3629<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> with the appended character count <a href="/static/rfc.txt">here</a>. Feel free to check my work with ctrl-F. It ended up being more of a mental pull than I expected, and it fluctuated between feeling like real fun and contrived garbage, which seems like a fair sign of a pretty good puzzle.</p>
+
+<p>I don&rsquo;t think I&rsquo;m totally finished with this toy for good, but I certainly am finished for the time being. When I read Tom&rsquo;s paper, I noticed that his arbitrary digits were a near-anagram of his total character count. That suggested to me that there was some rhyme, reason, or algorithm to how he got that figure, but I couldn&rsquo;t find a clear path myself. Thankfully, a brute force search turned out to be feasible even on very long strings, but I&rsquo;d like to crack this in a more elegant way some day. I&rsquo;m sure there might be some cool visualizations to be made. The ex-physics student in me was screaming &ldquo;phase space!!! phase space!!!!!!&rdquo;, and while phase space problems do typically lend themselves to interesting graphics, I&rsquo;m just not there on this problem. Yet.</p>
 
 <div class="footnotes">
 
 
 <ol>
-<li id="fn:1">Murder, really.</li>
+<li id="fn:1">Another one was that he could only write programs for DOS.</li>
+
+<li id="fn:2">A description of the UTF-8 standard for encoding Unicode into binary. Felt fitting.</li>
 </ol>
 
 </div>
 
     </div>
-
 
     <input type="checkbox" id="modalactivate">
     <label for="modalactivate" class="modal-background"></label>
