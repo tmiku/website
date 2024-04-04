@@ -261,3 +261,8 @@ strong {font-weight: 600; font-size:20px}
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
+
+html {
+    visibility: visible;
+    opacity: 1;
+}

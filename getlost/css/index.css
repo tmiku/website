@@ -272,3 +272,8 @@ footer {
     text-decoration: dotted underline;
     cursor: pointer
 }
+
+html {
+    visibility: visible;
+    opacity: 1;
+}

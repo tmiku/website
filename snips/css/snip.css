@@ -230,3 +230,8 @@ p > a:link, p > a:visited {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
+
+html {
+    visibility: visible;
+    opacity: 1;
+}
