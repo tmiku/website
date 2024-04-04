@@ -91,6 +91,9 @@ a, label {
 
 .contentline{
     display: inline-block;
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-right:10px;
     width:100%
 }
 
@@ -131,7 +134,6 @@ footer {
     font-size: 12pt;
     font-weight: 400;
     color: #70131e;
-    float: left
 }
 
 #footericons {
