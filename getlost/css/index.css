@@ -249,7 +249,6 @@ footer {
     font-size: 12pt;
     font-weight: 400;
     color: #70131e;
-    float: left
 }
 
 #footericons {
@@ -272,4 +271,9 @@ footer {
 #bottomlinks > a, #bottomlinks > label {
     text-decoration: dotted underline;
     cursor: pointer
+}
+
+html {
+    visibility: visible;
+    opacity: 1;
 }

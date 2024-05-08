@@ -158,7 +158,6 @@ footer {
     font-size: 12pt;
     font-weight: 400;
     color: #70131e;
-    float: left
 }
 
 #footericons {
@@ -261,4 +260,9 @@ strong {font-weight: 600; font-size:20px}
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
+}
+
+html {
+    visibility: visible;
+    opacity: 1;
 }
