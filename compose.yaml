@@ -5,10 +5,10 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    restart: always
   mikuserv:
     container_name: mikuserv
     build: /home/tmiku/mikuserv/
     expose: # expose mikuserv to ngninx container, but no "ports" entry to external internet
       - 3001
-
-
+    restart: always
