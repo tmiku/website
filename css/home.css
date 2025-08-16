@@ -94,7 +94,8 @@ a, label {
     padding-top:6px;
     padding-bottom:6px;
     padding-right:10px;
-    width:100%
+    width:100%;
+    margin-right:24px;
 }
 
 .contentname{
