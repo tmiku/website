@@ -1,3 +1,5 @@
 whoo.sh
-tmiku.net.key
-tmiku.net.pem
+*.key
+*.pem
+*.crt
+
