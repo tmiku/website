@@ -6,9 +6,18 @@ services:
       - "80:80"
       - "443:443"
     restart: always
+    secrets:
+      - ssl_key
+      - ssl_cert
   mikuserv:
     container_name: mikuserv
     build: /home/tmiku/mikuserv/
     expose: # expose mikuserv to ngninx container, but no "ports" entry to external internet
       - 3001
     restart: always
+
+secrets:
+  ssl_cert:
+    file: /etc/ssl/certs/tmiku.net.pem
+  ssl_key:
+    file: /etc/ssl/private/tmiku.net.key

@@ -2,4 +2,5 @@ whoo.sh
 *.key
 *.pem
 *.crt
+.env*
 
